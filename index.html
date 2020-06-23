@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="main">
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var root = "https://jsonplaceholder.typicode.com/comments";
+
+    $.ajax (root, {
+        dataType: "json",
+        method: 'GET',
+        success: function(response){
+            $.each(response, function(index, item){
+                var postId = item.postId;
+                var email = item.email;
+                var $info = $("<p/>").text("Post id is: " + postId + " email is " + email);
+                $("div.main").append($info);
+            });
+
+            console.log(response);
+        },
+        error: function(request,errorType, errorMsg){
+            alert("Ajax Fehlfunktion:" + errorMsg);
+        },
+        data: {"postId": 1},
+
+
+    });
+</script>
+</body>
+</html>
